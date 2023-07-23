@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BoreholeCalculations.Models
+namespace BoreholeCalculations.Models.Calculations
 {
 	public class SimplePressureCalculationStrategy : IPressureCalculationStrategy
 	{
-		const double g = 9.81; // ускорение свободного падения
+		const double g = 9.81; 
 
 		public async Task<double[]> CalculatePressureArray(double depth, double numSteps, double rhoSurface, CancellationToken cancellationToken)
 			=> await Task.Run(async () =>
@@ -18,7 +18,7 @@ namespace BoreholeCalculations.Models
 				double stepSize = depth / numSteps;
 				for (int i = 0; i < numSteps; i++)
 				{
-					cancellationToken.ThrowIfCancellationRequested(); // проверяем, не была ли отменена задача
+					cancellationToken.ThrowIfCancellationRequested(); 
 					double currentDepth = (i + 0.5) * stepSize;
 					double currentPressure = rhoSurface * g * currentDepth;
 					result[i] = currentPressure;
