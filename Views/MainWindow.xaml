@@ -3,10 +3,40 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BoreholeCalculations"
+        xmlns:local="clr-namespace:BoreholeCalculations.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"
+        Height="450"
+        Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="0.25*" />
+        </Grid.RowDefinitions>
+        <GridSplitter Grid.Row="1"
+                      Grid.ColumnSpan="4"
+                      ShowsPreview="False"
+                      Height="3"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Center" />
+        <GridSplitter Grid.Column="1"
+                      Grid.RowSpan="3"
+                      ShowsPreview="False"
+                      Width="4"
+                      HorizontalAlignment="Center"
+                      Margin="0,0,0,86" />
+        <Grid Grid.Column="2"
+              Grid.ColumnSpan="2"
+              Margin="0,0,0,3"
+              Grid.RowSpan="2">
+            <local:ChartsPanelControl />
+        </Grid>
     </Grid>
 </Window>
