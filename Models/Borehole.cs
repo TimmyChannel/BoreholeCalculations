@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using BoreholeCalculations.Models.Calculations;
+using System.Threading;
 
 namespace BoreholeCalculations.Models
 {
@@ -15,11 +17,11 @@ namespace BoreholeCalculations.Models
 		double _depth;
 		Point _coordinates;
 		Dictionary<double, double> _pressureByDepth;
-		public string Name { get => _name; set => SetProperty(ref _name, value); }
 		public int ID => _id;
+		public string Name { get => _name; set => SetProperty(ref _name, value); }
 		public double Depth { get => _depth; set => SetProperty(ref _depth, value); }
 		public Point Coordinates => _coordinates;
-		public Dictionary<double, double> PressureByDepth => new Dictionary<double, double>(_pressureByDepth);
+		public Dictionary<double, double> PressureByDepth { get => _pressureByDepth; set => SetProperty(ref _pressureByDepth, value); }
 		public Borehole(string name, int id, double depth, Point coordinates)
 		{
 			_name = name;
@@ -28,6 +30,6 @@ namespace BoreholeCalculations.Models
 			_coordinates = coordinates;
 			_pressureByDepth = new Dictionary<double, double>();
 		}
-		public void
+
 	}
 }
