@@ -12,7 +12,7 @@ namespace BoreholeCalculations.Models.Calculations
 		const double g = 9.81; 
 
 		public async Task<double[]> CalculatePressureArray(double depth, double numSteps, double rhoSurface, CancellationToken cancellationToken)
-			=> await Task.Run(async () =>
+			=> await Task.Run(() =>
 			{
 				double[] result = new double[(int)numSteps];
 				double stepSize = depth / numSteps;
@@ -22,7 +22,6 @@ namespace BoreholeCalculations.Models.Calculations
 					double currentDepth = (i + 0.5) * stepSize;
 					double currentPressure = rhoSurface * g * currentDepth;
 					result[i] = currentPressure;
-					await Task.Delay(1);
 				}
 				return result;
 			}, cancellationToken);

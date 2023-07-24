@@ -9,19 +9,22 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="600"
              FontFamily="Arial"
-             FontSize="14">
-    <UserControl.DataContext>
-        <viewModel:ChartsPanelControlViewModel />
-    </UserControl.DataContext>
+             FontSize="14"
+             DataContext="{Binding ChartsPanelControlViewModel, Mode=OneWay, Source={StaticResource Locator}}">
     <Grid>
         <TabControl>
             <TabItem Header="Одиночный график">
-                <liveChart:CartesianChart Series="{Binding Series}">
-                    
+                <liveChart:CartesianChart Series="{Binding SingleSeries}"
+                                          ZoomMode="Both"
+                                          >
+                   
                 </liveChart:CartesianChart>
             </TabItem>
             <TabItem Header="Сравнение">
-                
+                <liveChart:CartesianChart Series="{Binding StackSeries}"
+                                          ZoomMode="Both">
+
+                </liveChart:CartesianChart>
             </TabItem>
         </TabControl>
     </Grid>

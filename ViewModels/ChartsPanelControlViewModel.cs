@@ -7,23 +7,139 @@ using System.Text;
 using System.Threading.Tasks;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
+using BoreholeCalculations.Models;
+using CommunityToolkit.Mvvm.Messaging;
+using System.Diagnostics;
+using System.Threading;
 
 namespace BoreholeCalculations.ViewModels
 {
 	public class ChartsPanelControlViewModel
 	{
+		BoreholeService _service;
+		public ChartsPanelControlViewModel(BoreholeService service)
+		{
+			_service = service;
+			WeakReferenceMessenger.Default.Register<Borehole>(this, UpdateBorehole);
+			WeakReferenceMessenger.Default.Register<List<IBorehole>>(this, UpdateBoreholes);
+			var token = new CancellationToken();
+			_service.CalculatePessureInAllBoreholes(token, 100);
+		}
 
-		public ISeries[] Series { get; set; }
+		private void UpdateBorehole(object recipient, Borehole message)
+		{
+			if (message == null) return;
+			var list = message.PressureByDepth.ToList();
+			((LineSeries<KeyValuePair<double, double>>)SingleSeries[0]).Values = list;
+			SingleSeries[0].Name = message.Name;
+		}
+		private void UpdateBoreholes(object recipient, List<IBorehole> message)
+		{
+			if (message == null) return;
+			for (int i = 0; i < StackSeries.Count() && i < message.Count(); i++)
+			{
+				Debug.WriteLine($"I have: {message[i].Name}");
+				var list = ((Borehole)message[i]).PressureByDepth.ToList();
+				((StackedAreaSeries<KeyValuePair<double, double>>)StackSeries[i]).Values = list;
+				StackSeries[i].Name = message[i].Name;
+			}
+		}
+		public ISeries[] StackSeries { get; set; }
 			= new ISeries[]
 			{
-				new LineSeries<int>
+				new StackedAreaSeries<KeyValuePair<double, double>>
 				{
-					Values = new int[] { 4, 6, 5, 3, -3, -1, 2 },
+Stroke = new LinearGradientPaint(new[]{ new SKColor(45, 64, 89), new SKColor(255, 212, 96)}) { StrokeThickness = 4 },
+			GeometryStroke = new LinearGradientPaint(new[]{ new SKColor(45, 64, 89), new SKColor(255, 212, 96)}) { StrokeThickness = 5 },                  GeometryFill = null,
+					GeometrySize = 2,
+					Mapping=(point, charPoint)=>
+					{
+						charPoint.PrimaryValue=point.Value;
+						charPoint.SecondaryValue=point.Key;
+					}
+				},
+				new StackedAreaSeries<KeyValuePair<double, double>>
+				{
 					Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 4 },
 					Fill = null,
 					GeometryFill = null,
 					GeometryStroke = new SolidColorPaint(SKColors.DarkBlue){StrokeThickness=5},
 					GeometrySize = 2,
+					Mapping=(point, charPoint)=>
+					{
+						charPoint.PrimaryValue=point.Value;
+						charPoint.SecondaryValue=point.Key;
+					}
+				},
+				new StackedAreaSeries<KeyValuePair<double, double>>
+				{
+					Stroke = new SolidColorPaint(SKColors.Yellow) { StrokeThickness = 4 },
+					Fill = null,
+					GeometryFill = null,
+					GeometryStroke = new SolidColorPaint(SKColors.LightYellow){StrokeThickness=5},
+					GeometrySize = 2,
+					Mapping=(point, charPoint)=>
+					{
+						charPoint.PrimaryValue=point.Value;
+						charPoint.SecondaryValue=point.Key;
+					}
+				},
+				new StackedAreaSeries<KeyValuePair<double, double>>
+				{
+					Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 4 },
+					Fill = null,
+					GeometryFill = null,
+					GeometryStroke = new SolidColorPaint(SKColors.DarkBlue){StrokeThickness=5},
+					GeometrySize = 2,
+					Mapping=(point, charPoint)=>
+					{
+						charPoint.PrimaryValue=point.Value;
+						charPoint.SecondaryValue=point.Key;
+					}
+				},
+				new StackedAreaSeries<KeyValuePair<double, double>>
+				{
+					Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 4 },
+					Fill = null,
+					GeometryFill = null,
+					GeometryStroke = new SolidColorPaint(SKColors.DarkBlue){StrokeThickness=5},
+					GeometrySize = 2,
+					Mapping=(point, charPoint)=>
+					{
+						charPoint.PrimaryValue=point.Value;
+						charPoint.SecondaryValue=point.Key;
+					}
+				},
+			};
+
+		public ISeries[] SingleSeries { get; set; }
+			= new ISeries[]
+			{
+				new LineSeries<KeyValuePair<double, double>>
+				{
+					Values=new KeyValuePair<double, double>[]
+					{
+						new KeyValuePair<double, double>(3, 4),
+						new KeyValuePair<double, double>(-2, 5),
+						new KeyValuePair<double, double>(5, 1),
+						new KeyValuePair<double, double>(-1, -3),
+						new KeyValuePair<double, double>(2, 6),
+						new KeyValuePair<double, double>(-4, 2),
+						new KeyValuePair<double, double>(0, 0),
+						new KeyValuePair<double, double>(-3, -5),
+						new KeyValuePair<double, double>(6, 3),
+						new KeyValuePair<double, double>(-5, 4)
+					},
+					Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 4 },
+					Fill = null,
+					GeometryFill = null,
+					GeometryStroke = new SolidColorPaint(SKColors.DarkBlue){StrokeThickness=5},
+					GeometrySize = 2,
+					Mapping=(point, charPoint)=>
+					{
+						charPoint.PrimaryValue=point.Value;
+						charPoint.SecondaryValue=point.Key;
+					}
 				},
 			};
 	}

@@ -15,9 +15,10 @@ namespace BoreholeCalculations.Models.Calculations
 		{
 			_pressureCalculationStrategy = strategy;
 		}
-		public double[] CalculatePressureArray(double depth, double numSteps, double rhoSurface, CancellationToken cancellationToken)
+		public Task<double[]> CalculatePressureArray(double depth, double numSteps, double rhoSurface, CancellationToken cancellationToken)
 		{
-			return _pressureCalculationStrategy.CalculatePressureArray(depth, numSteps, rhoSurface, cancellationToken).Result;
+			return _pressureCalculationStrategy.CalculatePressureArray(depth, numSteps, rhoSurface, cancellationToken);
 		}
+
 	}
 }

@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:BoreholeCalculations"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <local:Locator x:Key="Locator"/>
     </Application.Resources>
 </Application>

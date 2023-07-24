@@ -27,7 +27,7 @@
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Center" />
         <GridSplitter Grid.Column="1"
-                      Grid.RowSpan="3"
+                      Grid.RowSpan="2"
                       ShowsPreview="False"
                       Width="4"
                       HorizontalAlignment="Center"
@@ -38,5 +38,6 @@
               Grid.RowSpan="2">
             <local:ChartsPanelControl />
         </Grid>
+            <local:BoreholeTableControl />
     </Grid>
 </Window>

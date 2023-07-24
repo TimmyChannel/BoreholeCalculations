@@ -25,9 +25,14 @@ namespace BoreholeCalculations.Models.Data
 			return _boreholes.FirstOrDefault(b => b.ID == id);
 		}
 
-		public IEnumerable<IBorehole> GetAll()
+		public List<IBorehole> GetAll()
 		{
-			return _boreholes.ToList();
+			List<IBorehole> list = new List<IBorehole>();
+			foreach (var item in _boreholes)
+			{
+				list.Add(item);
+			}
+			return list;
 		}
 
 		public void Update(IBorehole borehole)

@@ -8,10 +8,10 @@ namespace BoreholeCalculations.Models.Data
 {
 	public interface IBoreholeRepository
 	{
-		void Add(IBorehole well);
+		void Add(IBorehole borehole);
 		IBorehole GetById(int id);
-		IEnumerable<IBorehole> GetAll();
-		void Update(IBorehole well);
+		List<IBorehole> GetAll();
+		void Update(IBorehole borehole);
 		void Delete(int id);
 	}
 }

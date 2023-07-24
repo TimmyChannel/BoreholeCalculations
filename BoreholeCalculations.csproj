@@ -121,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\BoreholeTableControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ChartsPanelControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -134,13 +138,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Borehole.cs" />
+    <Compile Include="Models\BoreholeService.cs" />
     <Compile Include="Models\Calculations\IPressureCalculationStrategy.cs" />
     <Compile Include="Models\Calculations\PressureCalculator.cs" />
     <Compile Include="Models\Calculations\SimplePressureCalculationStrategy.cs" />
     <Compile Include="Models\Data\BoreholeRepository.cs" />
     <Compile Include="Models\Data\IBoreholeRepository.cs" />
     <Compile Include="Models\IBorehole.cs" />
+    <Compile Include="ViewModels\BoreholeTableControlViewModel.cs" />
     <Compile Include="ViewModels\ChartsPanelControlViewModel.cs" />
+    <Compile Include="Locator.cs" />
+    <Compile Include="ViewModels\Messenger.cs" />
+    <Compile Include="Views\BoreholeTableControl.xaml.cs">
+      <DependentUpon>BoreholeTableControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ChartsPanelControl.xaml.cs">
       <DependentUpon>ChartsPanelControl.xaml</DependentUpon>
     </Compile>
