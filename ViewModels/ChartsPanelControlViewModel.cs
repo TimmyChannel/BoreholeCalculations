@@ -49,9 +49,10 @@ namespace BoreholeCalculations.ViewModels
 			{
 				new StackedAreaSeries<KeyValuePair<double, double>>
 				{
-Stroke = new LinearGradientPaint(new[]{ new SKColor(45, 64, 89), new SKColor(255, 212, 96)}) { StrokeThickness = 4 },
-			GeometryStroke = new LinearGradientPaint(new[]{ new SKColor(45, 64, 89), new SKColor(255, 212, 96)}) { StrokeThickness = 5 },                  GeometryFill = null,
+					Stroke = new LinearGradientPaint(new[]{ new SKColor(0, 255, 0), new SKColor(0, 0, 255) }) { StrokeThickness = 4 },
+					GeometryStroke = new LinearGradientPaint(new[]{ new SKColor(0, 255, 0), new SKColor(0, 0, 255) }) { StrokeThickness = 5 },                  GeometryFill = null,
 					GeometrySize = 2,
+					Fill=null,
 					Mapping=(point, charPoint)=>
 					{
 						charPoint.PrimaryValue=point.Value;
@@ -60,11 +61,10 @@ Stroke = new LinearGradientPaint(new[]{ new SKColor(45, 64, 89), new SKColor(255
 				},
 				new StackedAreaSeries<KeyValuePair<double, double>>
 				{
-					Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 4 },
-					Fill = null,
-					GeometryFill = null,
-					GeometryStroke = new SolidColorPaint(SKColors.DarkBlue){StrokeThickness=5},
+					Stroke = new LinearGradientPaint(new[]{ new SKColor(255, 0, 0), new SKColor(255, 255, 0) }) { StrokeThickness = 4 },
+					GeometryStroke = new LinearGradientPaint(new[]{ new SKColor(255, 0, 0), new SKColor(255, 255, 0) }) { StrokeThickness = 5 },                  GeometryFill = null,
 					GeometrySize = 2,
+					Fill=null,
 					Mapping=(point, charPoint)=>
 					{
 						charPoint.PrimaryValue=point.Value;
@@ -73,11 +73,10 @@ Stroke = new LinearGradientPaint(new[]{ new SKColor(45, 64, 89), new SKColor(255
 				},
 				new StackedAreaSeries<KeyValuePair<double, double>>
 				{
-					Stroke = new SolidColorPaint(SKColors.Yellow) { StrokeThickness = 4 },
-					Fill = null,
-					GeometryFill = null,
-					GeometryStroke = new SolidColorPaint(SKColors.LightYellow){StrokeThickness=5},
+					Stroke = new LinearGradientPaint(new[]{ new SKColor(128, 0, 128), new SKColor(255, 0, 255) }) { StrokeThickness = 4 },
+					GeometryStroke = new LinearGradientPaint(new[]{ new SKColor(128, 0, 128), new SKColor(255, 0, 255) }) { StrokeThickness = 5 },                  GeometryFill = null,
 					GeometrySize = 2,
+					Fill=null,
 					Mapping=(point, charPoint)=>
 					{
 						charPoint.PrimaryValue=point.Value;
@@ -86,11 +85,10 @@ Stroke = new LinearGradientPaint(new[]{ new SKColor(45, 64, 89), new SKColor(255
 				},
 				new StackedAreaSeries<KeyValuePair<double, double>>
 				{
-					Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 4 },
-					Fill = null,
-					GeometryFill = null,
-					GeometryStroke = new SolidColorPaint(SKColors.DarkBlue){StrokeThickness=5},
+					Stroke = new LinearGradientPaint(new[]{ new SKColor(139, 69, 19), new SKColor(245, 222, 179) }) { StrokeThickness = 4 },
+					GeometryStroke = new LinearGradientPaint(new[]{ new SKColor(139, 69, 19), new SKColor(245, 222, 179) }) { StrokeThickness = 5 },                  GeometryFill = null,
 					GeometrySize = 2,
+					Fill=null,
 					Mapping=(point, charPoint)=>
 					{
 						charPoint.PrimaryValue=point.Value;
@@ -99,11 +97,10 @@ Stroke = new LinearGradientPaint(new[]{ new SKColor(45, 64, 89), new SKColor(255
 				},
 				new StackedAreaSeries<KeyValuePair<double, double>>
 				{
-					Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 4 },
-					Fill = null,
-					GeometryFill = null,
-					GeometryStroke = new SolidColorPaint(SKColors.DarkBlue){StrokeThickness=5},
+					Stroke = new LinearGradientPaint(new[]{ new SKColor(0, 255, 255), new SKColor(255, 165, 0) }) { StrokeThickness = 4 },
+					GeometryStroke = new LinearGradientPaint(new[]{  new SKColor(0, 255, 255), new SKColor(255, 165, 0) }) { StrokeThickness = 5 },                  GeometryFill = null,
 					GeometrySize = 2,
+					Fill=null,
 					Mapping=(point, charPoint)=>
 					{
 						charPoint.PrimaryValue=point.Value;
@@ -130,11 +127,10 @@ Stroke = new LinearGradientPaint(new[]{ new SKColor(45, 64, 89), new SKColor(255
 						new KeyValuePair<double, double>(6, 3),
 						new KeyValuePair<double, double>(-5, 4)
 					},
-					Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 4 },
-					Fill = null,
-					GeometryFill = null,
-					GeometryStroke = new SolidColorPaint(SKColors.DarkBlue){StrokeThickness=5},
+					Stroke = new LinearGradientPaint(new[]{ new SKColor(135, 206, 235), new SKColor(0, 0, 139) }) { StrokeThickness = 4 },
+					GeometryStroke = new LinearGradientPaint(new[]{  new SKColor(135, 206, 235), new SKColor(0, 0, 139) }) { StrokeThickness = 5 },                  GeometryFill = null,
 					GeometrySize = 2,
+					Fill=null,
 					Mapping=(point, charPoint)=>
 					{
 						charPoint.PrimaryValue=point.Value;
