@@ -146,7 +146,7 @@ namespace BoreholeCalculations.Models
 		{
 			_repository.Add(borehole);
 		}
-		public delegate void EventHandlerDelegate(object sender, System.ComponentModel.PropertyChangedEventArgs e);
+		public delegate void EventHandlerDelegate(object sender, PropertyChangedEventArgs e);
 
 		public void SubscribeToEvents(PropertyChangedEventHandler eventHandler)
 		{

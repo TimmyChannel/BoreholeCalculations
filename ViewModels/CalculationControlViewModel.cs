@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,9 @@ namespace BoreholeCalculations.ViewModels
 			StartCalculations = new RelayCommand(OnStartCalculations);
 			CancelCalculations = new RelayCommand(OnCancelCalculations);
 			_cancellationTokenSource = new CancellationTokenSource();
+			_service.SubscribeToEvents(OnBoreholeChanged);
+			IsBusy = false;
+			RecalculationVisibile = true;
 		}
 		private int _numOfSteps;
 		public int NumberOfSteps { get => _numOfSteps; set => SetProperty(ref _numOfSteps, value); }
@@ -31,6 +35,8 @@ namespace BoreholeCalculations.ViewModels
 		public int ProgressValue { get => _progressValue; set => SetProperty(ref _progressValue, value); }
 		private bool _isBusy;
 		public bool IsBusy { get => _isBusy; set => SetProperty(ref _isBusy, value); }
+		private bool _recalculationVisibile;
+		public bool RecalculationVisibile { get => _recalculationVisibile; set => SetProperty(ref _recalculationVisibile, value); }
 		public ICommand CancelCalculations { get; private set; }
 		public ICommand StartCalculations { get; private set; }
 		private void OnStartCalculations()
@@ -47,7 +53,6 @@ namespace BoreholeCalculations.ViewModels
 			var updateThread = new Thread(new ParameterizedThreadStart(OnUpdateParams));
 			updateThread.Start(thread);
 
-
 		}
 		private void OnUpdateParams(object obj)
 		{
@@ -58,6 +63,8 @@ namespace BoreholeCalculations.ViewModels
 				}
 				_cancellationTokenSource = new CancellationTokenSource();
 				IsBusy = false;
+				if (ProgressValue == 100)
+					RecalculationVisibile = false;
 				ProgressValue = 0;
 			}
 		}
@@ -65,6 +72,13 @@ namespace BoreholeCalculations.ViewModels
 		{
 			IsBusy = !IsBusy;
 			_cancellationTokenSource.Cancel();
+			RecalculationVisibile = true;
+		}
+		private void OnBoreholeChanged(object sender, PropertyChangedEventArgs e)
+		{
+			Borehole obj;
+			if (e.PropertyName == nameof(obj.Depth) || e.PropertyName == nameof(obj.AverageLiquidDensity))
+				RecalculationVisibile = true;
 		}
 
 	}
