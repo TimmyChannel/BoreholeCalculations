@@ -18,14 +18,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="0.25*" />
+            <RowDefinition Height="0.2*"
+                           MaxHeight="70" />
         </Grid.RowDefinitions>
-        <GridSplitter Grid.Row="1"
+        <!--<GridSplitter Grid.Row="1"
                       Grid.ColumnSpan="4"
                       ShowsPreview="False"
                       Height="3"
                       HorizontalAlignment="Stretch"
-                      VerticalAlignment="Center" />
+                      VerticalAlignment="Center" />-->
         <GridSplitter Grid.Column="1"
                       Grid.RowSpan="2"
                       ShowsPreview="False"
@@ -40,6 +41,6 @@
         </Grid>
             <local:BoreholeTableControl />
         <local:CalculationControl Grid.Row="2"
-                                  Grid.ColumnSpan="4" />
+                                  Grid.ColumnSpan="3" />
     </Grid>
 </Window>

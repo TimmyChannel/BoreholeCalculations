@@ -28,11 +28,12 @@
                             <i:InvokeCommandAction Command="{Binding SelectItems}"
                                                    CommandParameter="{Binding SelectedItems, ElementName=MainTable, Mode=OneWay}" />
                         </i:EventTrigger>
+                        <i:EventTrigger EventName="CellEditEnding">
+                            <i:InvokeCommandAction Command="{Binding EditItem}"
+                                                  CommandParameter="{Binding SelectedCells,ElementName=MainTable,Mode=OneWay}" />
+                        </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <!--<i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectedCellsChanged">
-                            <i:InvokeCommandAction Command="{Binding MainTable_SelectedCellsChanged}" />
-                        </i:EventTrigger>-->
+
                     <DataGrid.AlternatingRowBackground>
                         <LinearGradientBrush EndPoint="0.5,1"
                                              StartPoint="0.5,0">
@@ -58,13 +59,15 @@
                     </DataGrid.AlternatingRowBackground>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер"
-                                            Binding="{Binding Path=ID}" />
+                                            Binding="{Binding Path=ID, Mode=OneWay}" />
                         <DataGridTextColumn Header="Название скважины"
                                             Binding="{Binding Path=Name}" />
                         <DataGridTextColumn Header="Глубина (м)"
                                             Binding="{Binding Path=Depth}" />
                         <DataGridTextColumn Header="Координаты"
-                                            Binding="{Binding Path=Coordinates}" />
+                                            Binding="{Binding Path=Coordinates, Mode=OneWay}" />
+                        <DataGridTextColumn Header="Средняя плотность жикдости"
+                                            Binding="{Binding Path=AverageLiquidDensity}" />
                     </DataGrid.Columns>
                 </DataGrid>
                 <Grid.LayoutTransform>

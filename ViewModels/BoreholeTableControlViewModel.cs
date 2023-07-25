@@ -18,6 +18,7 @@ namespace BoreholeCalculations.ViewModels
 	public class BoreholeTableControlViewModel : ObservableObject
 	{
 		public ICommand SelectItems { get; private set; }
+		public ICommand EditItem { get; private set; }
 
 		BoreholeService _service;
 		ObservableCollection<IBorehole> _boreholes;
@@ -29,14 +30,15 @@ namespace BoreholeCalculations.ViewModels
 		public BoreholeTableControlViewModel(BoreholeService service)
 		{
 			_service = service;
-			_boreholes = new ObservableCollection<IBorehole>();
-			foreach (var item in _service.GetBoreholeList())
-			{
-				_boreholes.Add(item);
-			}
-			PropertyChanged += BoreholeTableControlViewModel_PropertyChanged;
+			_boreholes = _service.GetBoreholeList();
 			SelectItems = new RelayCommand<object>(MainTable_SelectedCellsChanged);
+			EditItem = new RelayCommand<object>(OnEditItem);
+			_service.SubscribeToEvents(BoreholeChanged);
 		}
+
+	
+
+	
 		private void MainTable_SelectedCellsChanged(object sender)
 		{
 			SelectedBoreholes.Clear();
@@ -50,18 +52,14 @@ namespace BoreholeCalculations.ViewModels
 			}
 			WeakReferenceMessenger.Default.Send(_items.ToList());
 		}
-		private void BoreholeTableControlViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		private void BoreholeChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-
-			switch (e.PropertyName)
-			{
-				case nameof(CurrentItem):
-					if (CurrentItem == null) return;
-					WeakReferenceMessenger.Default.Send(CurrentItem);
-					break;
-				default:
-					break;
-			}
+			Debug.WriteLine("Changed: "+((Borehole)sender).Name);
 		}
+		private void OnEditItem(object sender)
+		{
+			Debug.WriteLine(sender);
+		}
+
 	}
 }
