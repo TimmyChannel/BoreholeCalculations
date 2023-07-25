@@ -11,30 +11,42 @@
              d:DesignWidth="800"
              DataContext="{Binding BoreholeTableControlViewModel, Mode=OneWay, Source={StaticResource Locator}}">
     <Grid>
-        <Slider Grid.Row="0"
-                Name="_zoom"
-                Minimum="1"
-                Maximum="100" />
-        <ScrollViewer Grid.Row="1"
-                      VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Auto">
+        <Border BorderThickness="3,3,3,3"
+                CornerRadius="3">
+            <Border.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1"
+                                     StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5"
+                                            CenterX="0.5" />
+                            <SkewTransform CenterX="0.5"
+                                           CenterY="0.5" />
+                            <RotateTransform Angle="46"
+                                             CenterX="0.5"
+                                             CenterY="0.5" />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#331864DE" />
+                    <GradientStop Color="#668AFFF7"
+                                  Offset="1" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
             <Grid>
-                <DataGrid x:Name="MainTable"
-                          ItemsSource="{Binding Boreholes}"
-                          AutoGenerateColumns="False"
-                          CurrentItem="{Binding CurrentItem, Mode=OneWayToSource}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectedCellsChanged">
-                            <i:InvokeCommandAction Command="{Binding SelectItems}"
-                                                   CommandParameter="{Binding SelectedItems, ElementName=MainTable, Mode=OneWay}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="CellEditEnding">
-                            <i:InvokeCommandAction Command="{Binding EditItem}"
-                                                  CommandParameter="{Binding SelectedCells,ElementName=MainTable,Mode=OneWay}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-
-                    <DataGrid.AlternatingRowBackground>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.15*"
+                                   MaxHeight="100" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="0,0,1,3"
+                        CornerRadius="3">
+                    <Border.BorderBrush>
                         <LinearGradientBrush EndPoint="0.5,1"
                                              StartPoint="0.5,0">
                             <LinearGradientBrush.RelativeTransform>
@@ -43,38 +55,129 @@
                                                     CenterX="0.5" />
                                     <SkewTransform CenterX="0.5"
                                                    CenterY="0.5" />
-                                    <RotateTransform Angle="90"
+                                    <RotateTransform Angle="46"
                                                      CenterX="0.5"
                                                      CenterY="0.5" />
                                     <TranslateTransform />
                                 </TransformGroup>
                             </LinearGradientBrush.RelativeTransform>
-                            <GradientStop Color="#FFDAD9D9"
-                                          Offset="0" />
-                            <GradientStop Color="White"
+                            <GradientStop Color="#991864DE" />
+                            <GradientStop Color="#CD8AFFF7"
                                           Offset="1" />
-                            <GradientStop Color="#FFF9F9F9"
-                                          Offset="0.86" />
                         </LinearGradientBrush>
-                    </DataGrid.AlternatingRowBackground>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Номер"
-                                            Binding="{Binding Path=ID, Mode=OneWay}" />
-                        <DataGridTextColumn Header="Название скважины"
-                                            Binding="{Binding Path=Name}" />
-                        <DataGridTextColumn Header="Глубина (м)"
-                                            Binding="{Binding Path=Depth}" />
-                        <DataGridTextColumn Header="Координаты"
-                                            Binding="{Binding Path=Coordinates, Mode=OneWay}" />
-                        <DataGridTextColumn Header="Средняя плотность жикдости"
-                                            Binding="{Binding Path=AverageLiquidDensity}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Grid.LayoutTransform>
-                    <ScaleTransform ScaleX="{Binding Path=Value, ElementName=_zoom}"
-                                    ScaleY="{Binding Path=Value, ElementName=_zoom}" />
-                </Grid.LayoutTransform>
+                    </Border.BorderBrush>
+                    <Grid>
+                        <Label Content="Управление размером таблицы:"
+                               FontFamily="Arial"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               Margin="5,-5,5,5" />
+                        <Slider Grid.Row="0"
+                                Name="_zoom"
+                                Minimum="1"
+                                Maximum="20"
+                                VerticalAlignment="Bottom"
+                                Margin="5" />
+                    </Grid>
+                </Border>
+                <Border BorderThickness="1,0,3,3"
+                        CornerRadius="3"
+                        Grid.Column="1">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush EndPoint="0.5,1"
+                                             StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5"
+                                                    CenterX="0.5" />
+                                    <SkewTransform CenterX="0.5"
+                                                   CenterY="0.5" />
+                                    <RotateTransform Angle="-46"
+                                                     CenterX="0.5"
+                                                     CenterY="0.5" />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#991864DE" />
+                            <GradientStop Color="#CD8AFFF7"
+                                          Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <Grid>
+                        <Button Grid.Column="1"
+                                Command="{Binding OpenAddingWindow}"
+                                MaxWidth="150"
+                                MaxHeight="50"
+                                MinWidth="60"
+                                MinHeight="15"
+                                Margin="10,10,10,10"
+                                Content="Добавить новую скважину"
+                                FontFamily="Arial" />
+                    </Grid>
+                </Border>
+                <ScrollViewer Grid.Row="1"
+                              Grid.ColumnSpan="3"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto">
+                    <Grid>
+                        <DataGrid x:Name="MainTable"
+                                  ItemsSource="{Binding Boreholes}"
+                                  AutoGenerateColumns="False"
+                                  CurrentItem="{Binding CurrentItem, Mode=OneWayToSource}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectedCellsChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectItems}"
+                                                           CommandParameter="{Binding SelectedItems, ElementName=MainTable, Mode=OneWay}" />
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="CellEditEnding">
+                                    <i:InvokeCommandAction Command="{Binding EditItem}"
+                                                           CommandParameter="{Binding SelectedCells,ElementName=MainTable,Mode=OneWay}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                            <DataGrid.AlternatingRowBackground>
+                                <LinearGradientBrush EndPoint="0.5,1"
+                                                     StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5"
+                                                            CenterX="0.5" />
+                                            <SkewTransform CenterX="0.5"
+                                                           CenterY="0.5" />
+                                            <RotateTransform Angle="90"
+                                                             CenterX="0.5"
+                                                             CenterY="0.5" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FFDAD9D9"
+                                                  Offset="0" />
+                                    <GradientStop Color="White"
+                                                  Offset="1" />
+                                    <GradientStop Color="#FFF9F9F9"
+                                                  Offset="0.86" />
+                                </LinearGradientBrush>
+                            </DataGrid.AlternatingRowBackground>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Номер"
+                                                    Binding="{Binding Path=ID, Mode=OneWay}" />
+                                <DataGridTextColumn Header="Название скважины"
+                                                    Binding="{Binding Path=Name}" />
+                                <DataGridTextColumn Header="Глубина (м)"
+                                                    Binding="{Binding Path=Depth}" />
+                                <DataGridTextColumn Header="Координаты"
+                                                    Binding="{Binding Path=Coordinates, Mode=OneWay}" />
+                                <DataGridTextColumn Header="Средняя плотность жикдости"
+                                                    Binding="{Binding Path=AverageLiquidDensity}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Grid.LayoutTransform>
+                            <ScaleTransform ScaleX="{Binding Path=Value, ElementName=_zoom}"
+                                            ScaleY="{Binding Path=Value, ElementName=_zoom}" />
+                        </Grid.LayoutTransform>
+                    </Grid>
+                </ScrollViewer>
             </Grid>
-        </ScrollViewer>
+        </Border>
     </Grid>
 </UserControl>

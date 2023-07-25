@@ -1,0 +1,80 @@
+﻿<Window x:Class="BoreholeCalculations.Views.NewBoreholeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:local="clr-namespace:BoreholeCalculations.Views"
+        mc:Ignorable="d"
+        Title="Добавить новую скважину"
+        Height="150" Width="600"
+        ResizeMode="NoResize"
+        DataContext="{Binding NewBoreholeWindowViewModel, Mode=OneWay, Source={StaticResource Locator}}"
+        ShowInTaskbar="False">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Content="Название"/>
+        <TextBox Grid.Row="1"
+                 Margin="5"
+                 Text="{Binding BoreholeTitle}" />
+        <Label Content="Глубина"
+               Grid.Column="1" />
+        <TextBox Grid.Row="1"
+                 Grid.Column="1"
+                 Margin="5"
+                 PreviewTextInput="NumberValidationPositiveTextBox" 
+                 Text="{Binding BoreholeDepth}"/>
+        <Label Content="Координаты"
+               Grid.Column="2" />
+        <TextBox Grid.Row="1"
+                 Grid.Column="2"
+                 Margin="5"
+                 PreviewTextInput="NumberValidationTextBox" 
+                 Text="{Binding BoreholeCoordinatesX}"/>
+        <TextBox Grid.Row="2"
+                 Grid.Column="2"
+                 Margin="5"
+                 PreviewTextInput="NumberValidationTextBox"
+                 Text="{Binding BoreholeCoordinatesY}" />
+
+        <Label Content="Средняя плотность"
+               Grid.Column="3"
+                />
+        <TextBox Grid.Row="1"
+                 Grid.Column="3"
+                 Margin="5"
+                 PreviewTextInput="NumberValidationPositiveTextBox"
+                 Text="{Binding BoreholeAvgDensity}" />
+        <Button Grid.Row="1"
+                Grid.Column="4"
+                Margin="5"
+                FontFamily="Arial"
+                Content="Добавить"
+                Command="{Binding AddNewBorehole}">
+          
+        </Button>
+        <TextBlock Grid.Row="2"
+                   Grid.ColumnSpan="2"
+                   Text="Необходимо заполнить все поля"
+                   Foreground="Red"
+                   FontFamily="Arial"
+                   FontWeight="Bold"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Visibility="{Binding ShowWarning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+    </Grid>
+</Window>
