@@ -1,13 +1,14 @@
 ﻿<UserControl x:Class="BoreholeCalculations.Views.ChartsPanelControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:BoreholeCalculations.Views"
              xmlns:viewModel="clr-namespace:BoreholeCalculations.ViewModels"
              xmlns:liveChart="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="600"
              FontFamily="Arial"
              FontSize="14"
              DataContext="{Binding ChartsPanelControlViewModel, Mode=OneWay, Source={StaticResource Locator}}">
@@ -15,16 +16,16 @@
         <TabControl>
             <TabItem Header="Одиночный график">
                 <liveChart:CartesianChart Series="{Binding SingleSeries}"
-                                          ZoomMode="Both"
-                                          >
-                   
-                </liveChart:CartesianChart>
-            </TabItem>
-            <TabItem Header="Сравнение">
-                <liveChart:CartesianChart Series="{Binding StackSeries}"
                                           ZoomMode="Both">
 
                 </liveChart:CartesianChart>
+            </TabItem>
+            <TabItem Header="Сравнение">                
+                    <liveChart:CartesianChart Series="{Binding StackSeries}"
+                                              ZoomMode="Both"
+                                              Grid.Row="1">
+
+                    </liveChart:CartesianChart>                
             </TabItem>
         </TabControl>
     </Grid>

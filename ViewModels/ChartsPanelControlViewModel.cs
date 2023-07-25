@@ -17,37 +17,39 @@ namespace BoreholeCalculations.ViewModels
 	public class ChartsPanelControlViewModel
 	{
 		BoreholeService _service;
+		public List<string> Boreholes => _service.GetBoreholeList().Select(b => b.Name).ToList();
 		public ChartsPanelControlViewModel(BoreholeService service)
 		{
 			_service = service;
-			WeakReferenceMessenger.Default.Register<Borehole>(this, UpdateBorehole);
-			WeakReferenceMessenger.Default.Register<List<IBorehole>>(this, UpdateBoreholes);
+			WeakReferenceMessenger.Default.Register<List<IBorehole>>(this, UpdateChartSeries);
 			var token = new CancellationToken();
 			_service.CalculatePessureInAllBoreholes(token, 100);
 		}
 
-		private void UpdateBorehole(object recipient, Borehole message)
+		
+		private void UpdateChartSeries(object recipient, List<IBorehole> message)
 		{
 			if (message == null) return;
-			var list = message.PressureByDepth.ToList();
-			((LineSeries<KeyValuePair<double, double>>)SingleSeries[0]).Values = list;
-			SingleSeries[0].Name = message.Name;
-		}
-		private void UpdateBoreholes(object recipient, List<IBorehole> message)
-		{
-			if (message == null) return;
+
+			((LineSeries<KeyValuePair<double, double>>)SingleSeries[0]).Values = ((Borehole)message.Last()).PressureByDepth.ToList();
+			SingleSeries[0].Name = message.Last().Name;
+
+			foreach (var item in StackSeries)
+			{
+				item.Values = null;
+			}
 			for (int i = 0; i < StackSeries.Count() && i < message.Count(); i++)
 			{
 				Debug.WriteLine($"I have: {message[i].Name}");
 				var list = ((Borehole)message[i]).PressureByDepth.ToList();
-				((StackedAreaSeries<KeyValuePair<double, double>>)StackSeries[i]).Values = list;
+				((LineSeries<KeyValuePair<double, double>>)StackSeries[i]).Values = list;
 				StackSeries[i].Name = message[i].Name;
 			}
 		}
 		public ISeries[] StackSeries { get; set; }
 			= new ISeries[]
 			{
-				new StackedAreaSeries<KeyValuePair<double, double>>
+				new LineSeries<KeyValuePair<double, double>>
 				{
 					Stroke = new LinearGradientPaint(new[]{ new SKColor(0, 255, 0), new SKColor(0, 0, 255) }) { StrokeThickness = 4 },
 					GeometryStroke = new LinearGradientPaint(new[]{ new SKColor(0, 255, 0), new SKColor(0, 0, 255) }) { StrokeThickness = 5 },                  GeometryFill = null,
@@ -59,7 +61,7 @@ namespace BoreholeCalculations.ViewModels
 						charPoint.SecondaryValue=point.Key;
 					}
 				},
-				new StackedAreaSeries<KeyValuePair<double, double>>
+				new LineSeries<KeyValuePair<double, double>>
 				{
 					Stroke = new LinearGradientPaint(new[]{ new SKColor(255, 0, 0), new SKColor(255, 255, 0) }) { StrokeThickness = 4 },
 					GeometryStroke = new LinearGradientPaint(new[]{ new SKColor(255, 0, 0), new SKColor(255, 255, 0) }) { StrokeThickness = 5 },                  GeometryFill = null,
@@ -71,7 +73,7 @@ namespace BoreholeCalculations.ViewModels
 						charPoint.SecondaryValue=point.Key;
 					}
 				},
-				new StackedAreaSeries<KeyValuePair<double, double>>
+				new LineSeries<KeyValuePair<double, double>>
 				{
 					Stroke = new LinearGradientPaint(new[]{ new SKColor(128, 0, 128), new SKColor(255, 0, 255) }) { StrokeThickness = 4 },
 					GeometryStroke = new LinearGradientPaint(new[]{ new SKColor(128, 0, 128), new SKColor(255, 0, 255) }) { StrokeThickness = 5 },                  GeometryFill = null,
@@ -83,7 +85,7 @@ namespace BoreholeCalculations.ViewModels
 						charPoint.SecondaryValue=point.Key;
 					}
 				},
-				new StackedAreaSeries<KeyValuePair<double, double>>
+				new LineSeries<KeyValuePair<double, double>>
 				{
 					Stroke = new LinearGradientPaint(new[]{ new SKColor(139, 69, 19), new SKColor(245, 222, 179) }) { StrokeThickness = 4 },
 					GeometryStroke = new LinearGradientPaint(new[]{ new SKColor(139, 69, 19), new SKColor(245, 222, 179) }) { StrokeThickness = 5 },                  GeometryFill = null,
@@ -95,7 +97,7 @@ namespace BoreholeCalculations.ViewModels
 						charPoint.SecondaryValue=point.Key;
 					}
 				},
-				new StackedAreaSeries<KeyValuePair<double, double>>
+				new LineSeries<KeyValuePair<double, double>>
 				{
 					Stroke = new LinearGradientPaint(new[]{ new SKColor(0, 255, 255), new SKColor(255, 165, 0) }) { StrokeThickness = 4 },
 					GeometryStroke = new LinearGradientPaint(new[]{  new SKColor(0, 255, 255), new SKColor(255, 165, 0) }) { StrokeThickness = 5 },                  GeometryFill = null,

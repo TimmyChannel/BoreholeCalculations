@@ -39,5 +39,7 @@
             <local:ChartsPanelControl />
         </Grid>
             <local:BoreholeTableControl />
+        <local:CalculationControl Grid.Row="2"
+                                  Grid.ColumnSpan="4" />
     </Grid>
 </Window>
