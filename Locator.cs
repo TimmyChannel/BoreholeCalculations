@@ -15,12 +15,14 @@ namespace BoreholeCalculations
 		public BoreholeTableControlViewModel BoreholeTableControlViewModel { get; set; }
 		public ChartsPanelControlViewModel ChartsPanelControlViewModel { get; set; }
 		public CalculationControlViewModel CalculationControlViewModel { get; set; }
+		public NewBoreholeWindowViewModel NewBoreholeWindowViewModel { get; set; }
 		public Locator()
 		{
 
 			BoreholeTableControlViewModel = new BoreholeTableControlViewModel(_service);
 			ChartsPanelControlViewModel = new ChartsPanelControlViewModel(_service);
 			CalculationControlViewModel = new CalculationControlViewModel(_service);
+			NewBoreholeWindowViewModel = new NewBoreholeWindowViewModel(_service);
 		}
 	}
 }

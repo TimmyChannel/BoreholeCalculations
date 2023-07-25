@@ -21,6 +21,7 @@ namespace BoreholeCalculations.ViewModels
 		public CalculationControlViewModel(BoreholeService service)
 		{
 			_service = service;
+
 			_progressValue = 0;
 			StartCalculations = new RelayCommand(OnStartCalculations);
 			CancelCalculations = new RelayCommand(OnCancelCalculations);

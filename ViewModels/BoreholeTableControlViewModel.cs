@@ -1,4 +1,5 @@
 ﻿using BoreholeCalculations.Models;
+using BoreholeCalculations.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -19,6 +20,7 @@ namespace BoreholeCalculations.ViewModels
 	{
 		public ICommand SelectItems { get; private set; }
 		public ICommand EditItem { get; private set; }
+		public ICommand OpenAddingWindow { get; private set; }
 
 		BoreholeService _service;
 		ObservableCollection<IBorehole> _boreholes;
@@ -30,14 +32,26 @@ namespace BoreholeCalculations.ViewModels
 		public BoreholeTableControlViewModel(BoreholeService service)
 		{
 			_service = service;
+			_service.CollectionChanged += _service_CollectionChanged;
 			_boreholes = _service.GetBoreholeList();
 			SelectItems = new RelayCommand<object>(MainTable_SelectedCellsChanged);
 			EditItem = new RelayCommand<object>(OnEditItem);
+			OpenAddingWindow = new RelayCommand(OpenNewWindow);
 			_service.SubscribeToEvents(BoreholeChanged);
+
 		}
 
-	
+		private void _service_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+			Boreholes = _service.GetBoreholeList();
+		}
 
+		private void OpenNewWindow() 
+		{
+			var wind = new NewBoreholeWindow();
+			wind.Topmost = true;
+			wind.Show();
+		}
 	
 		private void MainTable_SelectedCellsChanged(object sender)
 		{

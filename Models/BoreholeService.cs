@@ -3,6 +3,7 @@ using BoreholeCalculations.Models.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace BoreholeCalculations.Models
 	public class BoreholeService
 	{
 		IBoreholeRepository _repository;
+		public event NotifyCollectionChangedEventHandler CollectionChanged;
 
 		public int LiquidDensity { get; }
 
@@ -22,7 +24,14 @@ namespace BoreholeCalculations.Models
 		{
 			_repository = new BoreholeRepository(CreateBoreholes());
 			LiquidDensity = liquidDensity;
+			_repository.CollectionChanged += _boreholes_CollectionChanged;
 		}
+
+		private void _boreholes_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			CollectionChanged?.Invoke(this, e);
+		}
+
 		private ObservableCollection<IBorehole> CreateBoreholes()
 		{
 			return new ObservableCollection<IBorehole>()
@@ -104,11 +113,16 @@ namespace BoreholeCalculations.Models
 						var arr = calculator.CalculatePressureArray(item.Depth, numSteps, item.AverageLiquidDensity, cancellationToken).Result;
 						var depthStep = item.Depth / numSteps;
 						var pressureByDepth = new Dictionary<double, double>();
+						counter++;
+						progressCallback?.Invoke(counter);
+						if (item.Depth <= 0)
+						{
+							pressureByDepth.Add(0, 0);
+							continue;
+						}
 						for (int i = 0; i < numSteps; i++)
 							pressureByDepth.Add(depthStep * i, arr[i]);
 						collectionPressureByDepth.Add(pressureByDepth);
-						counter++;
-						progressCallback?.Invoke(counter);
 					}
 					int c = 0;
 					foreach (var item in collectionPressureByDepth)

@@ -13,19 +13,22 @@
              FontSize="14"
              DataContext="{Binding ChartsPanelControlViewModel, Mode=OneWay, Source={StaticResource Locator}}">
     <Grid>
-        <TabControl>
+        <TabControl Background="#FFFDB5B5">
             <TabItem Header="Одиночный график">
                 <liveChart:CartesianChart Series="{Binding SingleSeries}"
-                                          ZoomMode="Both">
-
+                                          ZoomMode="Both"
+                                          Background="Aqua">
+                    
                 </liveChart:CartesianChart>
             </TabItem>
-            <TabItem Header="Сравнение">                
-                    <liveChart:CartesianChart Series="{Binding StackSeries}"
-                                              ZoomMode="Both"
-                                              Grid.Row="1">
+            <TabItem Header="Сравнение">
+                <liveChart:CartesianChart Series="{Binding StackSeries}"
+                                          ZoomMode="Both"
+                                          Grid.Row="1"
+                                          Background="Aqua">
 
-                    </liveChart:CartesianChart>                
+
+                </liveChart:CartesianChart>
             </TabItem>
         </TabControl>
     </Grid>
