@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +10,17 @@ namespace BoreholeCalculations.Models.Data
 {
 	public class BoreholeRepository : IBoreholeRepository
 	{
-		private List<IBorehole> _boreholes;
-
-		public BoreholeRepository(List<IBorehole> boreholes)
+		private ObservableCollection<IBorehole> _boreholes;
+		public event NotifyCollectionChangedEventHandler CollectionChanged;
+		public BoreholeRepository(ObservableCollection<IBorehole> boreholes)
 		{
 			_boreholes = boreholes;
+			_boreholes.CollectionChanged += _boreholes_CollectionChanged;
+		}
+
+		private void _boreholes_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			CollectionChanged?.Invoke(this, e);
 		}
 
 		public void Add(IBorehole borehole)
@@ -25,9 +33,9 @@ namespace BoreholeCalculations.Models.Data
 			return _boreholes.FirstOrDefault(b => b.ID == id);
 		}
 
-		public List<IBorehole> GetAll()
+		public ObservableCollection<IBorehole> GetAll()
 		{
-			List<IBorehole> list = new List<IBorehole>();
+			ObservableCollection<IBorehole> list = new ObservableCollection<IBorehole>();
 			foreach (var item in _boreholes)
 			{
 				list.Add(item);

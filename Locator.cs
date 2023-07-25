@@ -14,11 +14,13 @@ namespace BoreholeCalculations
 		private readonly BoreholeService _service = new BoreholeService(1000);
 		public BoreholeTableControlViewModel BoreholeTableControlViewModel { get; set; }
 		public ChartsPanelControlViewModel ChartsPanelControlViewModel { get; set; }
+		public CalculationControlViewModel CalculationControlViewModel { get; set; }
 		public Locator()
 		{
 
 			BoreholeTableControlViewModel = new BoreholeTableControlViewModel(_service);
 			ChartsPanelControlViewModel = new ChartsPanelControlViewModel(_service);
+			CalculationControlViewModel = new CalculationControlViewModel(_service);
 		}
 	}
 }
