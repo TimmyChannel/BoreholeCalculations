@@ -12,6 +12,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using System.Diagnostics;
 using System.Threading;
 using System.Collections.ObjectModel;
+using LiveChartsCore.SkiaSharpView.Painting.Effects;
 
 namespace BoreholeCalculations.ViewModels
 {
@@ -47,6 +48,66 @@ namespace BoreholeCalculations.ViewModels
 				StackSeries[i].Name = message[i].Name;
 			}
 		}
+		#region Axes Design
+		public Axis[] XAxes1 { get; }
+		  = new Axis[]
+		  {
+				new Axis
+				{
+					Name = "Глубина, м",
+					NamePaint = new SolidColorPaint(new SKColor(229,229,229)),
+					LabelsPaint = new SolidColorPaint(new SKColor(229,229,229)),
+					TextSize = 14,
+					SeparatorsPaint = new SolidColorPaint(new SKColor(229,229,229)) { StrokeThickness = 1 },
+				}
+		  };
+
+		public Axis[] YAxes1 { get;  }
+			= new Axis[]
+			{
+				new Axis
+				{
+					Name = "Давление, Па",
+					NamePaint = new SolidColorPaint(new SKColor(229, 229, 229)),
+					LabelsPaint = new SolidColorPaint(new SKColor(229, 229, 229)),
+					TextSize = 14,
+					SeparatorsPaint = new SolidColorPaint(new SKColor(229, 229, 229))
+					{
+						StrokeThickness = 1,
+						PathEffect = new DashEffect(new float[] { 3, 3 })
+					}
+				}
+			};	
+		public Axis[] XAxes2 { get; }
+		  = new Axis[]
+		  {
+				new Axis
+				{
+					Name = "Глубина, м",
+					NamePaint = new SolidColorPaint(new SKColor(229,229,229)),
+					LabelsPaint = new SolidColorPaint(new SKColor(229,229,229)),
+					TextSize = 14,
+					SeparatorsPaint = new SolidColorPaint(new SKColor(229,229,229)) { StrokeThickness = 1 },
+				}
+		  };
+
+		public Axis[] YAxes2 { get;  }
+			= new Axis[]
+			{
+				new Axis
+				{
+					Name = "Давление, Па",
+					NamePaint = new SolidColorPaint(new SKColor(229, 229, 229)),
+					LabelsPaint = new SolidColorPaint(new SKColor(229, 229, 229)),
+					TextSize = 14,
+					SeparatorsPaint = new SolidColorPaint(new SKColor(229, 229, 229))
+					{
+						StrokeThickness = 1,
+						PathEffect = new DashEffect(new float[] { 3, 3 })
+					}
+				}
+			};
+		#endregion
 		#region Series Design
 		public ISeries[] StackSeries { get; set; }
 			= new ISeries[]
@@ -144,7 +205,7 @@ namespace BoreholeCalculations.ViewModels
 					{
 						charPoint.PrimaryValue=point.Value;
 						charPoint.SecondaryValue=point.Key;
-					}
+					},
 				},
 			};
 		#endregion
