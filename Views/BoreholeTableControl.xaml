@@ -9,7 +9,10 @@
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800"
-             DataContext="{Binding BoreholeTableControlViewModel, Mode=OneWay, Source={StaticResource Locator}}">
+             DataContext="{Binding BoreholeTableControlViewModel, Mode=OneWay, Source={StaticResource Locator}}"
+             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+    <UserControl.Resources>
+    </UserControl.Resources>
     <Grid>
         <Border BorderThickness="3,3,3,3"
                 CornerRadius="3">
@@ -120,7 +123,9 @@
                               VerticalScrollBarVisibility="Auto"
                               HorizontalScrollBarVisibility="Auto">
                     <Grid>
-                        <DataGrid x:Name="MainTable"
+                        <DataGrid RowStyle="{DynamicResource DataGridRowStyleDark}" RowHeaderStyle="{DynamicResource DataGridRowHeaderStyleDark}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyleDark}"
+                                  Style="{DynamicResource DataGridStyleDark}"
+                                  x:Name="MainTable"
                                   ItemsSource="{Binding Boreholes}"
                                   AutoGenerateColumns="False"
                                   CurrentItem="{Binding CurrentItem, Mode=OneWayToSource}">
