@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:vm="clr-namespace:BoreholeCalculations.ViewModels"
              xmlns:local="clr-namespace:BoreholeCalculations.Views"
              mc:Ignorable="d"
@@ -18,19 +19,47 @@
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Auto">
             <Grid>
-                <DataGrid ItemsSource="{Binding Boreholes}"
+                <DataGrid x:Name="MainTable"
+                          ItemsSource="{Binding Boreholes}"
                           AutoGenerateColumns="False"
-                          CurrentItem="{Binding CurrentItem, Mode=OneWayToSource}"
-                          AlternatingRowBackground="#FF2B2B2B"
-                          RowBackground="#FF3B3F41"
-                          Foreground="#FFB9B9B9"
-                          Background="#FF3B3F41"
-                          HorizontalGridLinesBrush="#FF4E4E4E"
-                          VerticalGridLinesBrush="#FF464646">
+                          CurrentItem="{Binding CurrentItem, Mode=OneWayToSource}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedCellsChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectItems}"
+                                                   CommandParameter="{Binding SelectedItems, ElementName=MainTable, Mode=OneWay}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <!--<i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedCellsChanged">
+                            <i:InvokeCommandAction Command="{Binding MainTable_SelectedCellsChanged}" />
+                        </i:EventTrigger>-->
+                    <DataGrid.AlternatingRowBackground>
+                        <LinearGradientBrush EndPoint="0.5,1"
+                                             StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5"
+                                                    CenterX="0.5" />
+                                    <SkewTransform CenterX="0.5"
+                                                   CenterY="0.5" />
+                                    <RotateTransform Angle="90"
+                                                     CenterX="0.5"
+                                                     CenterY="0.5" />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FFDAD9D9"
+                                          Offset="0" />
+                            <GradientStop Color="White"
+                                          Offset="1" />
+                            <GradientStop Color="#FFF9F9F9"
+                                          Offset="0.86" />
+                        </LinearGradientBrush>
+                    </DataGrid.AlternatingRowBackground>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер"
                                             Binding="{Binding Path=ID}" />
-                        <DataGridTextColumn Header="Название"
+                        <DataGridTextColumn Header="Название скважины"
                                             Binding="{Binding Path=Name}" />
                         <DataGridTextColumn Header="Глубина (м)"
                                             Binding="{Binding Path=Depth}" />
