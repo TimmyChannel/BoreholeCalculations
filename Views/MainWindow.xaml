@@ -5,11 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BoreholeCalculations.Views"
         mc:Ignorable="d"
-        Title="Скважины"
+        Title="MainWindow"
         Height="450"
-        Width="800"
-        Icon="/Views/icons8-oil-rig-94.png"
-        Background="#FF545454">
+        Width="800">
     <Grid Background="#FF1C1C1E">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7*" />

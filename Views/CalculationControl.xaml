@@ -15,15 +15,30 @@
     </UserControl.Resources>
     <Grid>
         <Border BorderThickness="3,3,3,3"
-                CornerRadius="3"
-                BorderBrush="#FF004573"
-                Background="#FF1C1C1E">
-            <GroupBox Style="{DynamicResource GroupBoxStyleDark}"
-                      Header="Расчёты"
+                CornerRadius="3">
+            <Border.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1"
+                                     StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5"
+                                            CenterX="0.5" />
+                            <SkewTransform CenterX="0.5"
+                                           CenterY="0.5" />
+                            <RotateTransform Angle="46"
+                                             CenterX="0.5"
+                                             CenterY="0.5" />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#331864DE" />
+                    <GradientStop Color="#668AFFF7"
+                                  Offset="1" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <GroupBox Header="Расчёты"
                       FontFamily="Arial"
-                      FontWeight="Bold"
-                      BorderBrush="{x:Null}"
-                      Foreground="#FFE5E5E5">
+                      FontWeight="Bold">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1.5*" />
@@ -41,8 +56,7 @@
                                HorizontalAlignment="Left"
                                TextWrapping="Wrap">
                     </TextBlock>
-                    <TextBox Style="{DynamicResource TextBoxStyleDark}"
-                             Margin="5,5,5,5"
+                    <TextBox Margin="5,5,5,5"
                              Grid.Column="1"
                              MinWidth="60"
                              MinHeight="30"
@@ -53,8 +67,7 @@
                              HorizontalAlignment="Left"
                              PreviewTextInput="NumberValidationTextBox"
                              Text="{Binding NumberOfSteps}" />
-                    <Button Style="{DynamicResource ButtonStyleDark}"
-                            Grid.Column="3"
+                    <Button Grid.Column="3"
                             Margin="15,5,15,5"
                             MaxWidth="90"
                             MaxHeight="50"
@@ -66,8 +79,7 @@
                             FontSize="14"
                             IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanNotConverter}}"
                             Command="{Binding StartCalculations}" />
-                    <Button Style="{DynamicResource ButtonStyleDark}"
-                            Grid.Column="3"
+                    <Button Grid.Column="3"
                             Margin="15,5,15,5"
                             MaxWidth="90"
                             MaxHeight="50"
@@ -114,8 +126,29 @@
                              TextAlignment="Center"
                              HorizontalContentAlignment="Center"
                              VerticalContentAlignment="Center"
-                             Style="{DynamicResource TextBoxStyleDark}"
                              Visibility="{Binding RecalculationVisibile, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <TextBox.Background>
+                            <LinearGradientBrush EndPoint="0.5,1"
+                                                 StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5"
+                                                        CenterX="0.5" />
+                                        <SkewTransform CenterX="0.5"
+                                                       CenterY="0.5" />
+                                        <RotateTransform Angle="118.61"
+                                                         CenterX="0.5"
+                                                         CenterY="0.5" />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="White" />
+                                <GradientStop Color="#FFF2FCFF"
+                                              Offset="1" />
+                            </LinearGradientBrush>
+                        </TextBox.Background>
+
+
                     </TextBox>
                 </Grid>
             </GroupBox>

@@ -52,7 +52,7 @@
         <SolidColorBrush x:Key="TabItem.Selected.Border"
                          Color="#007ACC" />
         <SolidColorBrush x:Key="TabItem.Disabled.Background"
-                         Color="#FF7B7B7B" />
+                         Color="#FF9E9E9E" />
         <SolidColorBrush x:Key="TabItem.Disabled.Border"
                          Color="#FF005086" />
         <Style x:Key="TabItemStyle1"
