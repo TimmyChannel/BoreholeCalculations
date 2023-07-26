@@ -10,7 +10,10 @@
         Height="150" Width="600"
         ResizeMode="NoResize"
         DataContext="{Binding NewBoreholeWindowViewModel, Mode=OneWay, Source={StaticResource Locator}}"
-        ShowInTaskbar="False">
+        ShowInTaskbar="False"
+        Background="#FF1C1C1E"
+        Foreground="#FFE5E5E5"
+        Icon="/Views/icons8-oil-rig-94.png">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
@@ -27,44 +30,54 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label Content="Название"/>
+        <Label Content="Название"
+               Foreground="#FFE5E5E5" />
         <TextBox Grid.Row="1"
                  Margin="5"
-                 Text="{Binding BoreholeTitle}" />
+                 Text="{Binding BoreholeTitle}"
+                 Style="{StaticResource TextBoxStyleDark}" />
         <Label Content="Глубина"
-               Grid.Column="1" />
+               Grid.Column="1"
+               Foreground="#FFE5E5E5" />
         <TextBox Grid.Row="1"
                  Grid.Column="1"
                  Margin="5"
                  PreviewTextInput="NumberValidationPositiveTextBox" 
-                 Text="{Binding BoreholeDepth}"/>
+                 Text="{Binding BoreholeDepth}"
+                 Style="{StaticResource TextBoxStyleDark}" />
         <Label Content="Координаты"
-               Grid.Column="2" />
+               Grid.Column="2"
+               Foreground="#FFE5E5E5" />
         <TextBox Grid.Row="1"
                  Grid.Column="2"
                  Margin="5"
                  PreviewTextInput="NumberValidationTextBox" 
-                 Text="{Binding BoreholeCoordinatesX}"/>
+                 Text="{Binding BoreholeCoordinatesX}"
+                 Style="{StaticResource TextBoxStyleDark}"/>
         <TextBox Grid.Row="2"
                  Grid.Column="2"
                  Margin="5"
                  PreviewTextInput="NumberValidationTextBox"
-                 Text="{Binding BoreholeCoordinatesY}" />
+                 Text="{Binding BoreholeCoordinatesY}"
+                 Style="{StaticResource TextBoxStyleDark}" />
 
         <Label Content="Средняя плотность"
                Grid.Column="3"
+               Foreground="#FFE5E5E5" 
                 />
         <TextBox Grid.Row="1"
                  Grid.Column="3"
                  Margin="5"
                  PreviewTextInput="NumberValidationPositiveTextBox"
-                 Text="{Binding BoreholeAvgDensity}" />
+                 Text="{Binding BoreholeAvgDensity}"
+                 Style="{StaticResource TextBoxStyleDark}" />
         <Button Grid.Row="1"
                 Grid.Column="4"
                 Margin="5"
                 FontFamily="Arial"
                 Content="Добавить"
-                Command="{Binding AddNewBorehole}">
+                Command="{Binding AddNewBorehole}"
+                Style="{StaticResource ButtonStyleDark}">
           
         </Button>
         <TextBlock Grid.Row="2"
